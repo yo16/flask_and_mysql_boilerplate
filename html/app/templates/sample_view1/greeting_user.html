@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}sample_view1 greeting_user{% endblock %}
+
+{% block content %}
+<h1>
+  {{ greeting }} {% if user_name %}{{ user_name }}{% else %}World{% endif %} !!
+</h1>
+{% endblock %}
