@@ -8,7 +8,11 @@ FlaskとMySQLをDocker Containerで使うときのボイラープレート
 - Flask 1.1.2
 
 ## デバッグ用にローカルでFlaskサーバーを立てるとき
-- `python main.py` からの `http://localhost:5000/greeting/GoodEvening?user_name=yo16`
+- 環境変数を設定
+  - FLASK_APP: app
+  - FLASK_ENV: development
+- `python main.py` からの `http://localhost:5000/greeting/Good Evening?user_name=yo16`
+  - `Good Evening yo16!!` と表示される
 
 
 ## Dockerイメージ作成
