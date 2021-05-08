@@ -1,41 +1,42 @@
 version: '3'
 services:
-  mysql1:
-    image: mysql:8.0.24
-    ports:
-      - "3306:3306"
-    volumes:
-      # 初期データを投入するSQLが格納されているdir
-      - ./db/mysql_init:/docker-entrypoint-initdb.d
-      # 永続化するときにマウントするdir
-      - ./db/mysql_data:/var/lib/mysql
-      # 設定ファイル
-      - ./db/mysql_conf/my.cnf:/etc/mysql/conf.d/my.cnf
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: res_and_proj_04171830
-      MYSQL_DATABASE: resources_and_projects
-      MYSQL_USER: ikeda
-      MYSQL_PASSWORD: Ikeda2021!
-      TZ: 'Asia/Tokyo'
-    command: --innodb-use-native-aio=0 #これは環境依存？
-    networks:
-      - rap_net
+#  mysql1:
+#    image: mysql:8.0.24
+#    ports:
+#      - "3306:3306"
+#    volumes:
+#      # 初期データを投入するSQLが格納されているdir
+#      - ./db/mysql_init:/docker-entrypoint-initdb.d
+#      # 永続化するときにマウントするdir
+#      - ./db/mysql_data:/var/lib/mysql
+#      # 設定ファイル
+#      - ./db/mysql_conf/my.cnf:/etc/mysql/conf.d/my.cnf
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: res_and_proj_04171830
+#      MYSQL_DATABASE: resources_and_projects
+#      MYSQL_USER: ikeda
+#      MYSQL_PASSWORD: Ikeda2021!
+#      TZ: 'Asia/Tokyo'
+#    command: --innodb-use-native-aio=0 #これは環境依存？
+#    networks:
+#      - rap_net
 
-  api_server:
-    image: res_and_proj_apiserver:latest
+  html_server:
+#    image: flask_and_mysql:latest
+    build: .
     ports:
-      - "81:80"
+      - "5000:80"
     environment:
       RUNNING_ENV: docker
     volumes:
       # logが格納されるdir
       - ./log:/app/log
-    depends_on:
-      - mysql1
+#    depends_on:
+#      - mysql1
     restart: always
     networks:
-      - rap_net
+      - flask_and_mysql_net
 
 networks:
-  rap_net:
+  flask_and_mysql_net:
