@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request
 
 sample_view1 = Blueprint("greeting", __name__, template_folder="templates")
+# sample_view1 = Blueprint("greeting", __name__, template_folder="templates", root_path="html_server/app")
+# sample_view1 = Blueprint("greeting", "html_server/app", template_folder="templates")
 
 @sample_view1.route("/", methods=("GET", "POST"))
 @sample_view1.route("/<string:greeting>", methods=("GET", "POST"))

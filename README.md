@@ -15,8 +15,19 @@ FlaskとMySQLをDocker Containerで使うときのボイラープレート
   - `Good Evening yo16!!` と表示される
 
 
-## Dockerイメージ作成
-- 
+## Docker
+- イメージビルド
+    ```
+    docker build -t flask_and_mysql . --no-cache=true
+    ```
+- テスト起動
+    ```
+    docker run -p 5000:80 --name flask_and_mysql_container flask_and_mysql
+    ```
+- テスト起動しつつ、環境確認のためなどにbashで入る
+    ```
+    docker run -it -p 5000:80 --name flask_and_mysql_container flask_and_mysql /bin/bash
+    ```
 
 
 # MySQL
