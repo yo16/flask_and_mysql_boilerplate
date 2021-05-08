@@ -20,6 +20,11 @@ COPY ./html_server/server_settings/uwsgi.ini /app/
 
 # staticフォルダを指定しないといけない
 ENV STATIC_PATH /app/html_server/app/static
+# ちなみに、nginxの設定ファイルをコピーして、staticのエイリアスを変更しようとしてたけどうまくいかなかった。
+# COPYで上書きできなかったり、別名にすると同じ設定値は読んでくれなかったりして。
+# COPY ./html_server/server_settings/nginx.conf /etc/nginx/conf.d/
+
+
 
 # ポートの穴を開ける
 EXPOSE 80
