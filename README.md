@@ -1,0 +1,2 @@
+# flask_and_mysql_boilerplate
+FlaskとMySQLをDocker Containerで使うときのボイラープレート
