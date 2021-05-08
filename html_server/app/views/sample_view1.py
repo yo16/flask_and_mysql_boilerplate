@@ -1,10 +1,13 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, current_app
 
 sample_view1 = Blueprint("greeting", __name__, template_folder="templates")
 
 @sample_view1.route("/", methods=("GET", "POST"))
 @sample_view1.route("/<string:greeting>", methods=("GET", "POST"))
 def greeting_user(greeting="Hello"):
+    logger = current_app.logger
+    logger.info(f"greeting_user!! {greeting}")
+
     if request.method == "POST":
         user_name = request.form["user_name"]
     else:

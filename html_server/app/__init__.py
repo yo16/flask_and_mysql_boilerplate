@@ -1,6 +1,8 @@
 import os
 from flask import Flask
 
+from .app_logger import initialize_logger
+
 # Application Fuctory
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -21,6 +23,9 @@ def create_app(test_config=None):
     # viewの読み込み
     from .views.sample_view1 import sample_view1
     app.register_blueprint(sample_view1, url_prefix="/greeting")
+
+    # ロガーを設定
+    initialize_logger(app.logger)
 
     return app
 

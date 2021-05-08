@@ -28,6 +28,24 @@ FlaskとMySQLをDocker Containerで使うときのボイラープレート
     ```
     docker run -it -p 5000:80 --name flask_and_mysql_container flask_and_mysql /bin/bash
     ```
+- 起動している環境に入る
+    ```
+    docker exec -it flask_and_mysql_container /bin/bash
+    ```
+
+## docker-container
+- イメージビルド
+    ```
+    docker build -t flask_and_mysql . --no-cache=true
+    ```
+- 起動
+    ```
+    docker-compose up
+    ```
+- 起動している環境に入る
+    ```
+    docker exec -it flask_and_mysql_boilerplate_html_server_1 /bin/bash
+    ```
 
 
 # MySQL

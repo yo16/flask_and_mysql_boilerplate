@@ -23,15 +23,14 @@ services:
 #      - rap_net
 
   html_server:
-#    image: flask_and_mysql:latest
-    build: .
+    image: flask_and_mysql:latest
     ports:
       - "5000:80"
     environment:
       RUNNING_ENV: docker
     volumes:
       # logが格納されるdir
-      - ./log:/app/log
+      - ./html_server/log:/app/html_server/log
 #    depends_on:
 #      - mysql1
     restart: always
