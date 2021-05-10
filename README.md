@@ -33,7 +33,7 @@ FlaskとMySQLをDocker Containerで使うときのボイラープレート
     docker exec -it flask_and_mysql_container /bin/bash
     ```
 
-## docker-container
+## docker-compose
 - イメージビルド
     ```
     docker build -t flask_and_mysql . --no-cache=true
