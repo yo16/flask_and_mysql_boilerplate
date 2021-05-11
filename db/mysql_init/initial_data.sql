@@ -18,26 +18,45 @@ DROP DATABASE IF EXISTS `my_mysql`;
 CREATE DATABASE IF NOT EXISTS `my_mysql` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `my_mysql`;
 
---  テーブル my_mysql.dogs の構造をダンプしています
-DROP TABLE IF EXISTS `dogs`;
-CREATE TABLE IF NOT EXISTS `dogs` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL DEFAULT '太郎',
-  `breed` varchar(50) NOT NULL DEFAULT '柴犬',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+--  テーブル my_mysql.voucher の構造をダンプしています
+DROP TABLE IF EXISTS `voucher`;
+CREATE TABLE IF NOT EXISTS `voucher` (
+  `voucher_id` int NOT NULL AUTO_INCREMENT COMMENT '伝票ID',
+  `purchase_date` date NOT NULL COMMENT '購買日',
+  `shop_name` varchar(50) NOT NULL DEFAULT 'tokyo',
+  PRIMARY KEY (`voucher_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- テーブル my_mysql.dogs: ~0 rows (約) のデータをダンプしています
-DELETE FROM `dogs`;
-/*!40000 ALTER TABLE `dogs` DISABLE KEYS */;
-INSERT INTO `dogs` (`id`, `name`, `breed`) VALUES
-	(1, 'タロ', '樺太犬'),
-	(2, 'ジロ', '樺太犬'),
-	(3, 'ハチ', '秋田犬'),
-	(4, 'マサル', '秋田犬'),
-	(5, 'わさお', '秋田犬'),
-	(6, 'まる', '柴犬');
-/*!40000 ALTER TABLE `dogs` ENABLE KEYS */;
+-- テーブル my_mysql.voucher: ~0 rows (約) のデータをダンプしています
+DELETE FROM `voucher`;
+/*!40000 ALTER TABLE `voucher` DISABLE KEYS */;
+INSERT INTO `voucher` (`voucher_id`, `purchase_date`, `shop_name`) VALUES
+	(1, '2021-05-01', 'tokyo'),
+	(2, '2021-05-02', 'osaka'),
+	(3, '2021-05-02', 'fukuoka');
+/*!40000 ALTER TABLE `voucher` ENABLE KEYS */;
+
+--  テーブル my_mysql.voucher_detail の構造をダンプしています
+DROP TABLE IF EXISTS `voucher_detail`;
+CREATE TABLE IF NOT EXISTS `voucher_detail` (
+  `voucher_id` int NOT NULL COMMENT '伝票ID',
+  `detail_seq` int NOT NULL COMMENT 'SEQ',
+  `item_name` varchar(50) NOT NULL COMMENT '商品名',
+  `quantity` int NOT NULL COMMENT '個数',
+  PRIMARY KEY (`voucher_id`,`detail_seq`),
+  CONSTRAINT `voucher_id1` FOREIGN KEY (`voucher_id`) REFERENCES `voucher` (`voucher_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- テーブル my_mysql.voucher_detail: ~0 rows (約) のデータをダンプしています
+DELETE FROM `voucher_detail`;
+/*!40000 ALTER TABLE `voucher_detail` DISABLE KEYS */;
+INSERT INTO `voucher_detail` (`voucher_id`, `detail_seq`, `item_name`, `quantity`) VALUES
+	(1, 1, 'マジック', 1),
+	(1, 2, 'ボールペン', 2),
+	(2, 1, '消しゴム', 1),
+	(3, 1, 'ボールペン', 1),
+	(3, 2, '筆', 1);
+/*!40000 ALTER TABLE `voucher_detail` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
